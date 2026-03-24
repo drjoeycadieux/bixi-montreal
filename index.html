@@ -25,71 +25,64 @@
                            flex-direction: column;
                            overflow: hidden;
                            background: #f0f4f8;
-                           touch-action: pan-x pan-y;
                   }
 
-                  /* ===== OFFLINE BANNER STYLES ===== */
+                  /* ===== OFFLINE BANNER ===== */
                   .offline-banner {
-                           width: 100%;
                            background: linear-gradient(95deg, #8b2c2c 0%, #6b1a1a 100%);
                            color: white;
-                           padding: 12px 16px;
+                           padding: 10px 12px;
                            display: flex;
                            align-items: center;
                            justify-content: center;
-                           gap: 12px;
-                           flex-wrap: wrap;
-                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                           gap: 10px;
+                           flex-shrink: 0;
                            border-bottom: 2px solid #ffb347;
-                           z-index: 1000;
-                           position: relative;
+                           z-index: 100;
                   }
 
                   .warning-icon {
-                           display: inline-flex;
-                           align-items: center;
-                           justify-content: center;
-                           animation: pulseWarning 1.2s infinite ease-in-out;
                            flex-shrink: 0;
+                           animation: pulseWarning 1.2s infinite ease-in-out;
                   }
 
                   .triangle-svg {
                            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-                           display: block;
+                           width: 24px;
+                           height: 24px;
                   }
 
                   .banner-text {
                            font-weight: 600;
-                           font-size: 0.9rem;
-                           letter-spacing: 0.3px;
-                           text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                           font-size: 0.75rem;
                            text-align: center;
-                           flex: 1;
+                           line-height: 1.3;
                   }
 
                   .banner-text strong {
                            font-weight: 800;
                            text-transform: uppercase;
                            background: rgba(255, 255, 255, 0.2);
-                           padding: 3px 10px;
+                           padding: 2px 8px;
                            border-radius: 30px;
-                           margin-right: 6px;
+                           margin-right: 4px;
                            display: inline-block;
+                           font-size: 0.7rem;
                   }
 
                   @keyframes pulseWarning {
                            0% {
-                                    opacity: 0.8;
+                                    opacity: 0.7;
                                     transform: scale(1);
                            }
 
                            50% {
                                     opacity: 1;
-                                    transform: scale(1.08);
+                                    transform: scale(1.05);
                            }
 
                            100% {
-                                    opacity: 0.8;
+                                    opacity: 0.7;
                                     transform: scale(1);
                            }
                   }
@@ -98,56 +91,52 @@
                   .dashboard-header {
                            background: #1a2c3e;
                            color: white;
-                           padding: 10px 16px;
+                           padding: 8px 12px;
                            display: flex;
                            justify-content: space-between;
                            align-items: center;
                            flex-wrap: wrap;
-                           gap: 10px;
-                           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-                           z-index: 10;
+                           gap: 8px;
+                           flex-shrink: 0;
                   }
 
                   .title h1 {
-                           font-size: 1.25rem;
+                           font-size: 1rem;
                            font-weight: 600;
-                           letter-spacing: -0.2px;
                            display: flex;
                            align-items: center;
                            gap: 6px;
                   }
 
                   .title p {
-                           font-size: 0.7rem;
+                           font-size: 0.6rem;
                            opacity: 0.8;
                            margin-top: 2px;
                   }
 
                   .stats-summary {
                            display: flex;
-                           gap: 14px;
+                           gap: 8px;
                            background: rgba(255, 255, 255, 0.12);
-                           padding: 5px 14px;
+                           padding: 4px 10px;
                            border-radius: 40px;
-                           font-size: 0.75rem;
-                           flex-wrap: wrap;
-                           justify-content: center;
+                           font-size: 0.65rem;
                   }
 
                   .stats-summary i {
-                           margin-right: 4px;
+                           margin-right: 3px;
                   }
 
                   .stats-summary span {
                            font-weight: 700;
-                           font-size: 1rem;
-                           margin-left: 4px;
+                           font-size: 0.85rem;
+                           margin-left: 3px;
                   }
 
                   .last-updated {
-                           font-size: 0.7rem;
+                           font-size: 0.6rem;
                            background: #0f1a24;
-                           padding: 5px 12px;
+                           padding: 4px 10px;
                            border-radius: 24px;
                            white-space: nowrap;
                   }
@@ -157,21 +146,20 @@
                            display: flex;
                            flex: 1;
                            overflow: hidden;
-                           transition: all 0.2s ease;
                            min-height: 0;
                   }
 
                   #map {
-                           flex: 3;
+                           flex: 1;
                            height: 100%;
                            background: #cfe7e7;
-                           z-index: 1;
+                           min-height: 0;
                   }
 
                   .sidebar {
-                           flex: 1.2;
+                           width: 280px;
                            background: white;
-                           box-shadow: -2px 0 15px rgba(0, 0, 0, 0.06);
+                           box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
                            display: flex;
                            flex-direction: column;
                            overflow: hidden;
@@ -179,175 +167,159 @@
                   }
 
                   .sidebar-header {
-                           padding: 12px 16px;
+                           padding: 10px 12px;
                            background: #f8fafc;
                            border-bottom: 1px solid #e2edf2;
+                           flex-shrink: 0;
                   }
 
                   .sidebar-header h2 {
-                           font-size: 1.1rem;
+                           font-size: 0.95rem;
                            font-weight: 600;
                            color: #0f2b3d;
                            display: flex;
                            align-items: center;
-                           gap: 8px;
+                           gap: 6px;
                   }
 
                   .sidebar-header p {
-                           font-size: 0.7rem;
+                           font-size: 0.65rem;
                            color: #4a627a;
                            margin-top: 4px;
                   }
 
                   .search-box {
-                           margin: 12px 14px;
-                           padding: 8px 14px;
-                           border-radius: 44px;
+                           margin: 10px 12px;
+                           padding: 6px 12px;
+                           border-radius: 30px;
                            border: 1px solid #cbdde9;
                            background: white;
                            display: flex;
                            align-items: center;
-                           gap: 10px;
-                           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+                           gap: 8px;
+                           flex-shrink: 0;
                   }
 
                   .search-box input {
                            border: none;
                            outline: none;
                            width: 100%;
-                           font-size: 0.9rem;
+                           font-size: 0.85rem;
                            background: transparent;
                   }
 
                   .search-box i {
                            color: #7f8c8d;
-                           font-size: 0.9rem;
+                           font-size: 0.8rem;
                   }
 
                   .station-list {
                            flex: 1;
                            overflow-y: auto;
-                           padding: 8px 12px 16px 12px;
-                           scroll-behavior: smooth;
+                           padding: 8px 10px 12px 10px;
                            -webkit-overflow-scrolling: touch;
                   }
 
                   .station-card {
                            background: #ffffff;
-                           border-radius: 20px;
-                           padding: 14px;
-                           margin-bottom: 12px;
-                           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+                           border-radius: 16px;
+                           padding: 10px 12px;
+                           margin-bottom: 8px;
+                           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
                            border: 1px solid #eef2f6;
-                           transition: all 0.2s ease;
                            cursor: pointer;
-                           touch-action: manipulation;
+                           transition: all 0.1s ease;
                   }
 
                   .station-card:active {
                            transform: scale(0.98);
-                           background: #fefefe;
+                           background: #fafafa;
                   }
 
                   .station-name {
                            font-weight: 700;
-                           font-size: 1rem;
+                           font-size: 0.85rem;
                            color: #1e2f3f;
-                           margin-bottom: 10px;
+                           margin-bottom: 6px;
                            display: flex;
                            justify-content: space-between;
                            align-items: center;
-                           gap: 8px;
+                           gap: 6px;
                            word-break: break-word;
                   }
 
                   .station-name i {
                            color: #ff8c42;
-                           font-size: 0.9rem;
+                           font-size: 0.75rem;
                            flex-shrink: 0;
                   }
 
                   .availability {
                            display: flex;
-                           gap: 14px;
-                           margin-top: 10px;
+                           gap: 10px;
+                           margin-top: 6px;
                            flex-wrap: wrap;
                   }
 
                   .bikes-avail {
                            background: #e6f7e6;
-                           padding: 5px 12px;
-                           border-radius: 40px;
-                           font-size: 0.8rem;
+                           padding: 3px 10px;
+                           border-radius: 30px;
+                           font-size: 0.7rem;
                            font-weight: 600;
                            color: #1e6f1e;
                   }
 
                   .docks-avail {
                            background: #eef2ff;
-                           padding: 5px 12px;
-                           border-radius: 40px;
-                           font-size: 0.8rem;
+                           padding: 3px 10px;
+                           border-radius: 30px;
+                           font-size: 0.7rem;
                            font-weight: 600;
                            color: #1e4a76;
                   }
 
                   .capacity-badge {
-                           font-size: 0.7rem;
+                           font-size: 0.6rem;
                            color: #5f7f9e;
                            background: #f0f4fa;
-                           padding: 3px 8px;
-                           border-radius: 40px;
+                           padding: 2px 6px;
+                           border-radius: 30px;
                   }
 
                   .status-tag {
-                           font-size: 0.7rem;
+                           font-size: 0.6rem;
                            background: #f1f5f9;
-                           padding: 4px 10px;
+                           padding: 2px 8px;
                            border-radius: 30px;
                            display: inline-flex;
                            align-items: center;
-                           gap: 5px;
+                           gap: 4px;
                   }
 
                   .error-msg {
                            background: #fee2e2;
                            color: #b91c1c;
-                           padding: 16px;
-                           margin: 12px;
-                           border-radius: 24px;
+                           padding: 12px;
+                           margin: 10px;
+                           border-radius: 16px;
                            text-align: center;
-                           font-size: 0.85rem;
+                           font-size: 0.75rem;
                   }
 
                   .loading-spinner {
                            text-align: center;
-                           padding: 2rem;
+                           padding: 1.5rem;
                            color: #3b6e8b;
+                           font-size: 0.8rem;
                   }
 
-                  .map-reset-hint {
-                           position: absolute;
-                           bottom: 70px;
-                           right: 12px;
-                           background: rgba(255, 255, 255, 0.85);
-                           padding: 5px 10px;
-                           border-radius: 30px;
-                           font-size: 11px;
-                           z-index: 400;
-                           pointer-events: none;
-                           backdrop-filter: blur(4px);
-                           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                           font-weight: 500;
-                  }
-
-                  /* ===== FOOTER LEGAL STYLES - FULLY MOBILE FRIENDLY ===== */
+                  /* ===== FOOTER ===== */
                   .legal-footer {
                            background: #1e2f3f;
                            color: #9aaebf;
-                           padding: 14px 16px;
+                           padding: 8px 12px;
                            border-top: 1px solid #2d4459;
-                           z-index: 10;
                            flex-shrink: 0;
                   }
 
@@ -356,205 +328,158 @@
                            justify-content: center;
                            align-items: center;
                            flex-wrap: wrap;
-                           gap: 12px;
-                           row-gap: 8px;
-                           margin-bottom: 10px;
+                           gap: 8px;
+                           margin-bottom: 6px;
                   }
 
                   .footer-links a {
                            color: #ffb347;
                            text-decoration: none;
-                           font-size: 0.75rem;
+                           font-size: 0.65rem;
                            font-weight: 500;
-                           transition: opacity 0.2s;
-                           padding: 4px 0;
-                           display: inline-block;
-                  }
-
-                  .footer-links a:hover {
-                           opacity: 0.8;
-                           text-decoration: underline;
                   }
 
                   .footer-separator {
                            color: #4a627a;
-                           font-size: 0.7rem;
+                           font-size: 0.6rem;
                   }
 
                   .copyright {
-                           font-size: 0.65rem;
+                           font-size: 0.55rem;
                            color: #6a85a0;
                            text-align: center;
-                           line-height: 1.4;
+                           line-height: 1.3;
                   }
 
-                  /* Leaflet popup enhancements */
-                  .leaflet-popup-content {
-                           font-size: 0.85rem;
-                           min-width: 170px;
-                           margin: 10px 12px;
-                  }
-
-                  .leaflet-popup-content strong {
-                           color: #1e4663;
-                  }
-
-                  .custom-bike-icon div {
-                           transition: transform 0.1s ease;
-                  }
-
-                  .leaflet-control-attribution {
+                  .map-reset-hint {
+                           position: absolute;
+                           bottom: 10px;
+                           right: 10px;
+                           background: rgba(0, 0, 0, 0.65);
+                           color: white;
+                           padding: 4px 8px;
+                           border-radius: 20px;
                            font-size: 9px;
+                           z-index: 400;
+                           pointer-events: none;
+                           backdrop-filter: blur(4px);
                   }
 
-                  /* ===== RESPONSIVE: MOBILE FIRST ===== */
-                  @media (max-width: 780px) {
+                  /* ===== MOBILE SPECIFIC (SIDEBAR BECOMES BOTTOM SHEET) ===== */
+                  @media (max-width: 768px) {
                            .dashboard-container {
                                     flex-direction: column;
                            }
 
+                           #map {
+                                    flex: 1;
+                                    min-height: 0;
+                           }
+
                            .sidebar {
-                                    flex: none;
-                                    height: 45%;
-                                    max-height: 48%;
-                                    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+                                    width: 100%;
+                                    height: 42%;
+                                    max-height: 45%;
+                                    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
                                     border-radius: 20px 20px 0 0;
                            }
 
-                           #map {
-                                    min-height: 48%;
-                                    height: auto;
-                                    flex: 1 1 50%;
-                           }
-
-                           .dashboard-header {
-                                    padding: 8px 14px;
-                           }
-
-                           .title h1 {
-                                    font-size: 1rem;
-                           }
-
-                           .stats-summary {
-                                    gap: 8px;
-                                    font-size: 0.7rem;
-                                    padding: 4px 10px;
-                           }
-
-                           .stats-summary span {
-                                    font-size: 0.9rem;
-                           }
-
-                           .last-updated {
-                                    font-size: 0.6rem;
-                                    padding: 4px 10px;
-                                    white-space: nowrap;
-                           }
-
-                           .sidebar-header h2 {
-                                    font-size: 1rem;
+                           .station-list {
+                                    padding: 6px 10px 10px 10px;
                            }
 
                            .station-card {
-                                    padding: 12px;
+                                    padding: 8px 10px;
+                                    margin-bottom: 6px;
                            }
 
                            .station-name {
-                                    font-size: 0.9rem;
+                                    font-size: 0.8rem;
                            }
 
                            .bikes-avail,
                            .docks-avail {
-                                    font-size: 0.75rem;
-                                    padding: 4px 10px;
-                           }
-
-                           .offline-banner {
-                                    padding: 10px 12px;
-                                    gap: 8px;
-                           }
-
-                           .banner-text {
-                                    font-size: 0.75rem;
-                           }
-
-                           .banner-text strong {
-                                    font-size: 0.7rem;
+                                    font-size: 0.65rem;
                                     padding: 2px 8px;
                            }
 
-                           .triangle-svg {
-                                    width: 22px;
-                                    height: 22px;
-                           }
-
-                           .legal-footer {
-                                    padding: 12px 12px;
-                           }
-
-                           .footer-links {
-                                    gap: 10px;
-                                    margin-bottom: 8px;
-                           }
-
-                           .footer-links a {
-                                    font-size: 0.7rem;
-                           }
-
-                           .footer-separator {
-                                    display: inline-block;
-                           }
-
-                           .copyright {
-                                    font-size: 0.6rem;
-                           }
-
-                           .map-reset-hint {
-                                    bottom: 65px;
-                                    right: 10px;
-                                    font-size: 9px;
-                           }
-                  }
-
-                  /* Very small phones - stack links vertically for better touch */
-                  @media (max-width: 480px) {
-                           .stats-summary {
-                                    gap: 6px;
-                                    padding: 3px 8px;
-                           }
-
-                           .stats-summary span {
-                                    font-size: 0.8rem;
-                           }
-
-                           .dashboard-header {
-                                    gap: 6px;
+                           .sidebar-header h2 {
+                                    font-size: 0.85rem;
                            }
 
                            .search-box {
-                                    margin: 8px 12px;
-                                    padding: 6px 12px;
+                                    margin: 8px 10px;
+                                    padding: 5px 10px;
+                           }
+
+                           .search-box input {
+                                    font-size: 0.8rem;
+                           }
+
+                           .offline-banner {
+                                    padding: 6px 10px;
                            }
 
                            .banner-text {
-                                    font-size: 0.7rem;
+                                    font-size: 0.65rem;
                            }
 
                            .banner-text strong {
-                                    font-size: 0.65rem;
-                                    padding: 2px 6px;
-                                    margin-right: 4px;
+                                    font-size: 0.6rem;
+                                    padding: 1px 6px;
+                           }
+
+                           .triangle-svg {
+                                    width: 18px;
+                                    height: 18px;
+                           }
+
+                           .dashboard-header {
+                                    padding: 6px 10px;
+                           }
+
+                           .title h1 {
+                                    font-size: 0.9rem;
+                           }
+
+                           .stats-summary {
+                                    gap: 5px;
+                                    padding: 3px 8px;
+                                    font-size: 0.6rem;
+                           }
+
+                           .stats-summary span {
+                                    font-size: 0.75rem;
+                           }
+
+                           .last-updated {
+                                    font-size: 0.55rem;
+                                    padding: 3px 8px;
                            }
 
                            .legal-footer {
-                                    padding: 10px 10px;
+                                    padding: 6px 10px;
                            }
 
-                           /* Stack footer links vertically on very small screens */
+                           .footer-links {
+                                    gap: 6px;
+                           }
+
+                           .footer-links a {
+                                    font-size: 0.6rem;
+                           }
+
+                           .copyright {
+                                    font-size: 0.5rem;
+                           }
+                  }
+
+                  /* Very small phones - stack footer links */
+                  @media (max-width: 480px) {
                            .footer-links {
                                     flex-direction: column;
-                                    gap: 6px;
-                                    margin-bottom: 10px;
+                                    gap: 3px;
+                                    margin-bottom: 5px;
                            }
 
                            .footer-separator {
@@ -562,86 +487,62 @@
                            }
 
                            .footer-links a {
-                                    font-size: 0.7rem;
-                                    padding: 6px 0;
-                                    width: 100%;
-                                    text-align: center;
-                                    background: rgba(255, 255, 255, 0.05);
-                                    border-radius: 30px;
+                                    font-size: 0.6rem;
+                                    padding: 2px 0;
                            }
 
-                           .copyright {
-                                    font-size: 0.55rem;
-                                    padding: 0 4px;
+                           .sidebar {
+                                    height: 44%;
+                                    max-height: 48%;
                            }
                   }
 
-                  @media (min-width: 1024px) {
-                           .sidebar {
-                                    flex: 1;
-                                    min-width: 300px;
-                           }
-
-                           #map {
-                                    flex: 3;
-                           }
-
-                           .station-card:hover {
-                                    transform: translateY(-2px);
-                                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-                                    border-color: #cbdde9;
-                           }
-
-                           .map-reset-hint {
-                                    bottom: 80px;
-                           }
-
-                           .footer-links a {
-                                    font-size: 0.75rem;
-                           }
+                  .leaflet-popup-content {
+                           font-size: 0.75rem;
+                           min-width: 150px;
+                           margin: 8px 10px;
                   }
          </style>
 </head>
 
 <body>
-         <!-- OFFLINE BANNER - Mobile Friendly -->
+         <!-- OFFLINE BANNER -->
          <div class="offline-banner">
                   <div class="warning-icon">
-                           <svg class="triangle-svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                           <svg class="triangle-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 2L1 21H23L12 2Z" fill="#FFB347" stroke="#D98F2B" stroke-width="1.5" />
                                     <circle cx="12" cy="16" r="1.5" fill="#8B2C2C" />
                                     <rect x="11" y="9" width="2" height="5" rx="1" fill="#8B2C2C" />
                            </svg>
                   </div>
                   <div class="banner-text">
-                           ⚠️ <strong>SYSTEM OFFLINE</strong> — All Bixi stations are currently unavailable. Please
-                           check back later.
+                           ⚠️ <strong>SYSTEM OFFLINE</strong> — All Bixi stations are currently unavailable.
                   </div>
          </div>
 
+         <!-- HEADER -->
          <div class="dashboard-header">
                   <div class="title">
                            <h1><i class="fas fa-bicycle" style="color:#ff9f4a;"></i> BIXI Montréal</h1>
                            <p>Live stations • real-time availability</p>
                   </div>
                   <div class="stats-summary" id="globalStats">
-                           <i class="fas fa-charging-station"></i> Stations: <span id="totalStations">—</span>
-                           <i class="fas fa-bicycle"></i> Bikes: <span id="totalBikes">—</span>
-                           <i class="fas fa-parking"></i> Docks: <span id="totalDocks">—</span>
+                           <i class="fas fa-charging-station"></i> <span id="totalStations">—</span>
+                           <i class="fas fa-bicycle"></i> <span id="totalBikes">—</span>
+                           <i class="fas fa-parking"></i> <span id="totalDocks">—</span>
                   </div>
                   <div class="last-updated" id="updateTime">
                            <i class="far fa-clock"></i> Loading...
                   </div>
          </div>
 
+         <!-- MAIN CONTAINER -->
          <div class="dashboard-container">
                   <div id="map"></div>
                   <div class="sidebar">
                            <div class="sidebar-header">
-                                    <h2><i class="fas fa-map-pin"></i> Stations <span
-                                                      style="font-weight:normal; font-size:0.75rem;">(tap card →
-                                                      map)</span></h2>
+                                    <h2><i class="fas fa-map-pin"></i> Stations <span style="font-weight:normal;">(tap
+                                                      card → map)</span></h2>
                                     <p><i class="fas fa-search"></i> Filter by name</p>
                            </div>
                            <div class="search-box">
@@ -656,10 +557,10 @@
                   </div>
          </div>
          <div class="map-reset-hint">
-                  <i class="fas fa-hand-pointer"></i> Tap station card to center
+                  <i class="fas fa-hand-pointer"></i> Tap card to center
          </div>
 
-         <!-- LEGAL FOOTER - FULLY MOBILE FRIENDLY (stackable links) -->
+         <!-- FOOTER -->
          <footer class="legal-footer">
                   <div class="footer-links">
                            <span>© 2025 BIXI MTL Dashboard</span>
@@ -671,34 +572,28 @@
                            <a href="#" id="disclaimerLink">Disclaimer</a>
                   </div>
                   <div class="copyright">
-                           Data provided by BIXI Montréal (GBFS feed). This is an independent project not affiliated
-                           with PBSC or Lyft.
-                           Real-time availability may be delayed. Use at your own discretion.
+                           Independent project. Data from BIXI GBFS feed.
                   </div>
          </footer>
 
-         <!-- MODAL DIALOG FOR LEGAL CONTENT -->
+         <!-- MODAL -->
          <div id="legalModal"
-                  style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(3px);">
+                  style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center;">
                   <div
-                           style="background: white; max-width: 500px; width: 90%; max-height: 80%; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 35px rgba(0,0,0,0.3); display: flex; flex-direction: column;">
+                           style="background: white; max-width: 400px; width: 90%; max-height: 80%; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column;">
                            <div
-                                    style="padding: 18px 20px; background: #1a2c3e; color: white; display: flex; justify-content: space-between; align-items: center;">
-                                    <h3 style="font-size: 1.2rem;" id="modalTitle">Terms of Use</h3>
+                                    style="padding: 14px 18px; background: #1a2c3e; color: white; display: flex; justify-content: space-between; align-items: center;">
+                                    <h3 style="font-size: 1rem;" id="modalTitle">Terms of Use</h3>
                                     <button id="closeModal"
-                                             style="background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
+                                             style="background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer;">&times;</button>
                            </div>
-                           <div style="padding: 20px; overflow-y: auto; font-size: 0.9rem; line-height: 1.5; color: #1e2f3f;"
-                                    id="modalContent">
-                                    <!-- dynamic content injected -->
-                           </div>
+                           <div style="padding: 16px; overflow-y: auto; font-size: 0.8rem; line-height: 1.4; color: #1e2f3f;"
+                                    id="modalContent"></div>
                   </div>
          </div>
 
          <script>
-                  // ========== BIXI DASHBOARD - FULLY RESPONSIVE ==========
                   const GBFS_DISCOVERY_URL = 'https://gbfs.velobixi.com/gbfs/gbfs.json';
-
                   let stationInfoMap = new Map();
                   let stationStatusMap = new Map();
                   let map = null;
@@ -713,204 +608,127 @@
                   const stationListDiv = document.getElementById('stationList');
                   const searchInput = document.getElementById('stationSearch');
 
-                  // Modal elements
                   const modal = document.getElementById('legalModal');
                   const modalTitle = document.getElementById('modalTitle');
                   const modalContent = document.getElementById('modalContent');
                   const closeModalBtn = document.getElementById('closeModal');
 
                   function showLegalModal(type) {
-                           let title = '';
-                           let content = '';
+                           let title = '', content = '';
                            if (type === 'terms') {
                                     title = 'Terms of Use';
-                                    content = `<strong>Terms of Use</strong><br><br>
-                This dashboard is provided for informational purposes only. The data displayed comes from the public GBFS feed of BIXI Montréal.<br><br>
-                <strong>1. No Warranty</strong><br>
-                The availability of bikes and docks is shown in real-time but may be subject to delays or errors. We do not guarantee the accuracy, completeness, or timeliness of the information.<br><br>
-                <strong>2. Non-Affiliation</strong><br>
-                This project is an independent development and is not officially affiliated with, endorsed, or sponsored by BIXI Montréal, PBSC Urban Solutions, or Lyft.<br><br>
-                <strong>3. Use at Your Own Risk</strong><br>
-                Any reliance on the data provided is strictly at your own risk. We are not liable for any decisions made based on the station availability shown.<br><br>
-                <strong>4. Intellectual Property</strong><br>
-                All trademarks and logos remain property of their respective owners. The map tiles are provided by CartoDB and OpenStreetMap contributors.`;
+                                    content = `<strong>Terms of Use</strong><br><br>This dashboard is for informational purposes only. Data from public GBFS feed of BIXI Montréal.<br><br><strong>No Warranty</strong><br>Availability may have delays. We do not guarantee accuracy.<br><br><strong>Non-Affiliation</strong><br>Independent project, not affiliated with BIXI Montréal, PBSC, or Lyft.<br><br><strong>Use at Your Own Risk</strong><br>Any reliance on data is at your own risk.`;
                            } else if (type === 'privacy') {
                                     title = 'Privacy Policy';
-                                    content = `<strong>Privacy Policy</strong><br><br>
-                This dashboard does not collect, store, or share any personal data. No cookies are used for tracking purposes.<br><br>
-                <strong>Local Storage</strong><br>
-                No user data is saved locally. All station data is fetched directly from public BIXI endpoints and is not retained beyond the current session.<br><br>
-                <strong>Third-Party Services</strong><br>
-                The map uses Leaflet and CartoDB tile servers which may collect anonymized usage data according to their own privacy policies. No personal information is transmitted.<br><br>
-                <strong>Contact</strong><br>
-                For any privacy-related questions, please refer to BIXI Montréal's official privacy policy.`;
+                                    content = `<strong>Privacy Policy</strong><br><br>This dashboard does not collect, store, or share any personal data. No cookies are used.<br><br><strong>Local Storage</strong><br>No user data is saved. All station data is fetched from public BIXI endpoints.<br><br><strong>Third-Party Services</strong><br>Map uses Leaflet and CartoDB tile servers which may collect anonymized usage data.`;
                            } else if (type === 'disclaimer') {
                                     title = 'Disclaimer';
-                                    content = `<strong>Disclaimer</strong><br><br>
-                THE SOFTWARE AND DATA ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br><br>
-                IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE DATA.<br><br>
-                BIXI Montréal is a registered trademark. This dashboard is an unofficial tool meant to help users visualize station status. For official reservations and accurate real-time updates, please refer to the official BIXI mobile application.`;
+                                    content = `<strong>Disclaimer</strong><br><br>THE SOFTWARE AND DATA ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.<br><br>IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY.<br><br>BIXI Montréal is a registered trademark. This is an unofficial tool. For official service, use the official BIXI app.`;
                            }
                            modalTitle.innerText = title;
                            modalContent.innerHTML = content;
                            modal.style.display = 'flex';
                   }
 
-                  function closeModal() {
-                           modal.style.display = 'none';
-                  }
-
-                  // Event listeners for legal links
-                  document.getElementById('termsLink').addEventListener('click', (e) => {
-                           e.preventDefault();
-                           showLegalModal('terms');
-                  });
-                  document.getElementById('privacyLink').addEventListener('click', (e) => {
-                           e.preventDefault();
-                           showLegalModal('privacy');
-                  });
-                  document.getElementById('disclaimerLink').addEventListener('click', (e) => {
-                           e.preventDefault();
-                           showLegalModal('disclaimer');
-                  });
+                  function closeModal() { modal.style.display = 'none'; }
+                  document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); showLegalModal('terms'); });
+                  document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); showLegalModal('privacy'); });
+                  document.getElementById('disclaimerLink').addEventListener('click', (e) => { e.preventDefault(); showLegalModal('disclaimer'); });
                   closeModalBtn.addEventListener('click', closeModal);
-                  modal.addEventListener('click', (e) => {
-                           if (e.target === modal) closeModal();
-                  });
+                  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
                   function formatTimestamp(ts) {
                            if (!ts) return 'N/A';
-                           const date = new Date(ts * 1000);
-                           return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                           return new Date(ts * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                   }
 
                   async function fetchFeedUrls() {
-                           const response = await fetch(GBFS_DISCOVERY_URL);
-                           const data = await response.json();
+                           const res = await fetch(GBFS_DISCOVERY_URL);
+                           const data = await res.json();
                            const feeds = data?.data?.en?.feeds;
-                           if (!feeds) throw new Error('Invalid GBFS structure');
+                           if (!feeds) throw new Error('Invalid GBFS');
                            let stationInfoUrl = null, stationStatusUrl = null;
                            for (const feed of feeds) {
                                     if (feed.name === 'station_information') stationInfoUrl = feed.url;
                                     if (feed.name === 'station_status') stationStatusUrl = feed.url;
                            }
-                           if (!stationInfoUrl || !stationStatusUrl) throw new Error('Missing station info/status endpoints');
                            return { stationInfoUrl, stationStatusUrl };
                   }
 
                   async function fetchStationInfo(url) {
-                           const resp = await fetch(url);
-                           const json = await resp.json();
+                           const res = await fetch(url);
+                           const json = await res.json();
                            const stations = json.data?.stations;
-                           if (!stations) throw new Error('No station information');
-                           stations.forEach(station => {
-                                    stationInfoMap.set(station.station_id, {
-                                             name: station.name,
-                                             lat: station.lat,
-                                             lon: station.lon,
-                                             capacity: station.capacity || 0,
-                                             station_id: station.station_id,
-                                             address: station.address || ''
+                           stations.forEach(s => {
+                                    stationInfoMap.set(s.station_id, {
+                                             name: s.name, lat: s.lat, lon: s.lon, capacity: s.capacity || 0, station_id: s.station_id
                                     });
                            });
                            return stationInfoMap.size;
                   }
 
                   async function fetchStationStatus(url) {
-                           const resp = await fetch(url);
-                           const json = await resp.json();
+                           const res = await fetch(url);
+                           const json = await res.json();
                            const statuses = json.data?.stations;
-                           if (!statuses) throw new Error('No status data');
-                           statuses.forEach(status => {
-                                    stationStatusMap.set(status.station_id, {
-                                             num_bikes_available: status.num_bikes_available ?? 0,
-                                             num_docks_available: status.num_docks_available ?? 0,
-                                             is_renting: status.is_renting === true,
-                                             is_installed: status.is_installed !== false,
-                                             last_reported: status.last_reported
+                           statuses.forEach(s => {
+                                    stationStatusMap.set(s.station_id, {
+                                             num_bikes_available: s.num_bikes_available ?? 0,
+                                             num_docks_available: s.num_docks_available ?? 0,
+                                             is_renting: s.is_renting === true,
+                                             last_reported: s.last_reported
                                     });
                            });
-                           let latestReport = 0;
-                           for (let stat of stationStatusMap.values()) {
-                                    if (stat.last_reported && stat.last_reported > latestReport) latestReport = stat.last_reported;
-                           }
-                           return latestReport;
+                           let latest = 0;
+                           for (let stat of stationStatusMap.values()) if (stat.last_reported > latest) latest = stat.last_reported;
+                           return latest;
                   }
 
-                  function buildCombinedStations() {
+                  function buildCombined() {
                            const combined = [];
-                           for (let [id, info] of stationInfoMap.entries()) {
+                           for (let [id, info] of stationInfoMap) {
                                     const status = stationStatusMap.get(id) || { num_bikes_available: 0, num_docks_available: 0, is_renting: false, last_reported: null };
                                     combined.push({
-                                             id: id,
-                                             name: info.name,
-                                             lat: info.lat,
-                                             lon: info.lon,
-                                             capacity: info.capacity,
-                                             bikes: status.num_bikes_available ?? 0,
-                                             docks: status.num_docks_available ?? 0,
-                                             is_renting: status.is_renting === true,
-                                             is_installed: status.is_installed !== false,
-                                             last_reported: status.last_reported
+                                             id, name: info.name, lat: info.lat, lon: info.lon, capacity: info.capacity,
+                                             bikes: status.num_bikes_available, docks: status.num_docks_available,
+                                             is_renting: status.is_renting, last_reported: status.last_reported
                                     });
                            }
                            return combined;
                   }
 
-                  function escapeHtml(str) {
-                           if (!str) return '';
-                           return str.replace(/[&<>]/g, function (m) {
-                                    if (m === '&') return '&amp;';
-                                    if (m === '<') return '&lt;';
-                                    if (m === '>') return '&gt;';
-                                    return m;
-                           });
-                  }
+                  function escapeHtml(str) { return str?.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])) || ''; }
 
                   function renderStationList(stations) {
                            if (!stations.length) {
-                                    stationListDiv.innerHTML = `<div class="error-msg"><i class="fas fa-search-minus"></i> No station matches "${escapeHtml(searchInput.value)}"</div>`;
+                                    stationListDiv.innerHTML = `<div class="error-msg">No station matches "${escapeHtml(searchInput.value)}"</div>`;
                                     return;
                            }
                            let html = '';
-                           stations.forEach(station => {
-                                    const rentingStatus = station.is_renting
-                                             ? '<span class="status-tag" style="background:#dcfce7;"><i class="fas fa-check-circle"></i> Active</span>'
-                                             : '<span class="status-tag" style="background:#ffe4e2;"><i class="fas fa-ban"></i> Offline</span>';
+                           stations.forEach(s => {
                                     html += `
-                <div class="station-card" data-lat="${station.lat}" data-lon="${station.lon}" data-id="${station.id}">
-                    <div class="station-name">
-                        ${escapeHtml(station.name)}
-                        <i class="fas fa-location-dot" style="color:#ff8c42;"></i>
-                    </div>
-                    <div style="display:flex; justify-content: space-between; align-items:center; flex-wrap:wrap; gap:6px;">
-                        ${rentingStatus}
-                        <span class="capacity-badge"><i class="fas fa-database"></i> ${station.capacity} docks</span>
-                    </div>
-                    <div class="availability">
-                        <span class="bikes-avail"><i class="fas fa-bicycle"></i> ${station.bikes} available</span>
-                        <span class="docks-avail"><i class="fas fa-parking"></i> ${station.docks} free</span>
-                    </div>
-                </div>
-            `;
+                    <div class="station-card" data-lat="${s.lat}" data-lon="${s.lon}" data-id="${s.id}">
+                        <div class="station-name">${escapeHtml(s.name)} <i class="fas fa-location-dot"></i></div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px;">
+                            <span class="status-tag">${s.is_renting ? '✓ Active' : '⛔ Offline'}</span>
+                            <span class="capacity-badge">${s.capacity} docks</span>
+                        </div>
+                        <div class="availability">
+                            <span class="bikes-avail"><i class="fas fa-bicycle"></i> ${s.bikes}</span>
+                            <span class="docks-avail"><i class="fas fa-parking"></i> ${s.docks}</span>
+                        </div>
+                    </div>`;
                            });
                            stationListDiv.innerHTML = html;
                            document.querySelectorAll('.station-card').forEach(card => {
-                                    const clickHandler = (e) => {
-                                             const lat = parseFloat(card.dataset.lat);
-                                             const lon = parseFloat(card.dataset.lon);
-                                             const stationId = card.dataset.id;
-                                             if (map && !isNaN(lat) && !isNaN(lon)) {
+                                    card.addEventListener('click', () => {
+                                             const lat = parseFloat(card.dataset.lat), lon = parseFloat(card.dataset.lon), id = card.dataset.id;
+                                             if (map && !isNaN(lat)) {
                                                       map.setView([lat, lon], 16, { animate: true });
-                                                      const marker = currentMarkers.find(m => m.options?.stationId === stationId);
+                                                      const marker = currentMarkers.find(m => m.options?.stationId === id);
                                                       if (marker) marker.openPopup();
                                              }
-                                    };
-                                    card.addEventListener('click', clickHandler);
-                                    card.addEventListener('touchstart', (e) => {
-                                             card.style.transform = 'scale(0.98)';
-                                             setTimeout(() => { card.style.transform = ''; }, 120);
-                                    }, { passive: true });
+                                    });
                            });
                   }
 
@@ -919,80 +737,56 @@
                            if (markersLayer) markersLayer.clearLayers();
                            else markersLayer = L.layerGroup().addTo(map);
                            currentMarkers = [];
-                           const bikeIcon = L.divIcon({
-                                    className: 'custom-bike-icon',
-                                    html: `<div style="background-color:#ff8c42; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.25); border:2px solid white;"><i class="fas fa-bicycle" style="color:white; font-size:15px;"></i></div>`,
-                                    iconSize: [30, 30],
-                                    popupAnchor: [0, -12]
-                           });
-                           stations.forEach(station => {
-                                    const marker = L.marker([station.lat, station.lon], { icon: bikeIcon, stationId: station.id });
-                                    marker.bindPopup(`
-                    <div style="font-weight:700; font-size:1rem; margin-bottom:5px;">${escapeHtml(station.name)}</div>
-                    <div><i class="fas fa-bicycle"></i> <strong>${station.bikes}</strong> bikes</div>
-                    <div><i class="fas fa-parking"></i> <strong>${station.docks}</strong> free docks</div>
-                    <div><i class="fas fa-charging-station"></i> Capacity: ${station.capacity}</div>
-                    <div><i class="fas fa-info-circle"></i> ${station.is_renting ? '✅ Operational' : '⛔ Temporarily closed'}</div>
-                    <small><i class="far fa-clock"></i> Updated: ${station.last_reported ? formatTimestamp(station.last_reported) : 'recent'}</small>
-                `);
+                           const icon = L.divIcon({ html: '<div style="background:#ff8c42;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,0.3);border:2px solid white;"><i class="fas fa-bicycle" style="color:white;font-size:14px;"></i></div>', iconSize: [28, 28], popupAnchor: [0, -12] });
+                           stations.forEach(s => {
+                                    const marker = L.marker([s.lat, s.lon], { icon, stationId: s.id });
+                                    marker.bindPopup(`<b>${escapeHtml(s.name)}</b><br>🚲 ${s.bikes} bikes<br>🅿️ ${s.docks} free docks<br>📦 Capacity: ${s.capacity}<br>${s.is_renting ? '✅ Active' : '⛔ Offline'}`);
                                     marker.addTo(markersLayer);
                                     currentMarkers.push(marker);
                            });
-                           if (stations.length) map.fitBounds(L.latLngBounds(stations.map(s => [s.lat, s.lon])), { padding: [40, 40] });
-                           else if (allStationsArray.length) map.fitBounds(L.latLngBounds(allStationsArray.map(s => [s.lat, s.lon])), { padding: [40, 40] });
+                           if (stations.length) map.fitBounds(L.latLngBounds(stations.map(s => [s.lat, s.lon])), { padding: [30, 30] });
                   }
 
-                  function updateDashboardAndMap(filterText = '') {
+                  function updateDashboard(filter = '') {
                            if (!stationInfoMap.size) return;
-                           const stations = buildCombinedStations();
+                           const stations = buildCombined();
                            allStationsArray = stations;
                            let totalBikes = 0, totalDocks = 0;
                            stations.forEach(s => { totalBikes += s.bikes; totalDocks += s.docks; });
                            totalStationsSpan.innerText = stations.length;
                            totalBikesSpan.innerText = totalBikes;
                            totalDocksSpan.innerText = totalDocks;
-                           const filterLower = filterText.trim().toLowerCase();
-                           const filtered = filterLower ? stations.filter(s => s.name.toLowerCase().includes(filterLower)) : stations;
+                           const filtered = filter.trim() ? stations.filter(s => s.name.toLowerCase().includes(filter.toLowerCase())) : stations;
                            renderStationList(filtered);
                            updateMapMarkers(filtered);
                   }
 
-                  function setLastUpdated(ts) { updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> ${ts ? formatTimestamp(ts) : 'Live feed'}`; }
-
-                  async function loadBixiData() {
+                  async function load() {
                            try {
-                                    stationListDiv.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Fetching Bixi stations...</div>`;
                                     const { stationInfoUrl, stationStatusUrl } = await fetchFeedUrls();
                                     await fetchStationInfo(stationInfoUrl);
-                                    const latestReport = await fetchStationStatus(stationStatusUrl);
-                                    setLastUpdated(latestReport);
+                                    const last = await fetchStationStatus(stationStatusUrl);
+                                    updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> ${last ? formatTimestamp(last) : 'Live'}`;
                                     if (!map) {
                                              map = L.map('map').setView([45.515, -73.567], 13);
-                                             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM & CartoDB', subdomains: 'abcd', maxZoom: 18 }).addTo(map);
-                                             window.addEventListener('resize', () => map && setTimeout(() => map.invalidateSize(), 100));
+                                             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM & CartoDB' }).addTo(map);
+                                             window.addEventListener('resize', () => setTimeout(() => map?.invalidateSize(), 100));
                                     }
-                                    updateDashboardAndMap('');
-                                    if (window.searchListener) searchInput.removeEventListener('input', window.searchListener);
-                                    const searchHandler = (e) => updateDashboardAndMap(e.target.value);
-                                    searchInput.addEventListener('input', searchHandler);
-                                    window.searchListener = searchHandler;
-                                    if (window.refreshInterval) clearInterval(window.refreshInterval);
-                                    window.refreshInterval = setInterval(async () => {
+                                    updateDashboard('');
+                                    searchInput.addEventListener('input', (e) => updateDashboard(e.target.value));
+                                    setInterval(async () => {
                                              try {
                                                       const { stationStatusUrl: newUrl } = await fetchFeedUrls();
                                                       const newReport = await fetchStationStatus(newUrl);
-                                                      setLastUpdated(newReport);
-                                                      updateDashboardAndMap(searchInput.value);
-                                             } catch (err) { console.warn("Refresh err:", err); }
-                                    }, 50000);
+                                                      updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> ${formatTimestamp(newReport)}`;
+                                                      updateDashboard(searchInput.value);
+                                             } catch (e) { console.warn(e); }
+                                    }, 45000);
                            } catch (err) {
-                                    stationListDiv.innerHTML = `<div class="error-msg"><i class="fas fa-exclamation-triangle"></i> Error: ${err.message}<br>Check network.</div>`;
-                                    updateTimeSpan.innerHTML = `<i class="fas fa-exclamation-circle"></i> Connection issue`;
-                                    if (map) map.setView([45.5088, -73.554], 12);
+                                    stationListDiv.innerHTML = `<div class="error-msg">Error: ${err.message}</div>`;
                            }
                   }
-                  window.addEventListener('orientationchange', () => setTimeout(() => map?.invalidateSize(), 100));
-                  loadBixiData();
+                  load();
          </script>
 </body>
 
