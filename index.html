@@ -158,6 +158,7 @@
                            flex: 1;
                            overflow: hidden;
                            transition: all 0.2s ease;
+                           min-height: 0;
                   }
 
                   #map {
@@ -327,7 +328,7 @@
 
                   .map-reset-hint {
                            position: absolute;
-                           bottom: 12px;
+                           bottom: 70px;
                            right: 12px;
                            background: rgba(255, 255, 255, 0.85);
                            padding: 5px 10px;
@@ -338,6 +339,40 @@
                            backdrop-filter: blur(4px);
                            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
                            font-weight: 500;
+                  }
+
+                  /* ===== FOOTER LEGAL STYLES ===== */
+                  .legal-footer {
+                           background: #1e2f3f;
+                           color: #9aaebf;
+                           padding: 12px 20px;
+                           font-size: 0.7rem;
+                           text-align: center;
+                           border-top: 1px solid #2d4459;
+                           z-index: 10;
+                           flex-shrink: 0;
+                  }
+
+                  .legal-footer a {
+                           color: #ffb347;
+                           text-decoration: none;
+                           transition: opacity 0.2s;
+                  }
+
+                  .legal-footer a:hover {
+                           opacity: 0.8;
+                           text-decoration: underline;
+                  }
+
+                  .legal-footer .separator {
+                           margin: 0 8px;
+                           color: #4a627a;
+                  }
+
+                  .legal-footer .copyright {
+                           margin-top: 6px;
+                           font-size: 0.65rem;
+                           color: #6a85a0;
                   }
 
                   /* Leaflet popup enhancements */
@@ -367,8 +402,8 @@
 
                            .sidebar {
                                     flex: none;
-                                    height: 48%;
-                                    max-height: 52%;
+                                    height: 45%;
+                                    max-height: 48%;
                                     box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
                                     border-radius: 20px 20px 0 0;
                            }
@@ -439,6 +474,17 @@
                                     width: 22px;
                                     height: 22px;
                            }
+
+                           .legal-footer {
+                                    padding: 10px 14px;
+                                    font-size: 0.65rem;
+                           }
+
+                           .map-reset-hint {
+                                    bottom: 65px;
+                                    right: 10px;
+                                    font-size: 9px;
+                           }
                   }
 
                   @media (max-width: 480px) {
@@ -469,6 +515,11 @@
                                     padding: 2px 6px;
                                     margin-right: 4px;
                            }
+
+                           .legal-footer {
+                                    padding: 8px 10px;
+                                    font-size: 0.6rem;
+                           }
                   }
 
                   @media (min-width: 1024px) {
@@ -485,6 +536,10 @@
                                     transform: translateY(-2px);
                                     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
                                     border-color: #cbdde9;
+                           }
+
+                           .map-reset-hint {
+                                    bottom: 80px;
                            }
                   }
          </style>
@@ -546,6 +601,42 @@
                   <i class="fas fa-hand-pointer"></i> Tap station card to center
          </div>
 
+         <!-- LEGAL FOOTER WITH TERMS & DISCLAIMERS -->
+         <footer class="legal-footer">
+                  <div>
+                           <span>© 2025 BIXI MTL Dashboard</span>
+                           <span class="separator">•</span>
+                           <a href="#" id="termsLink">Terms of Use</a>
+                           <span class="separator">•</span>
+                           <a href="#" id="privacyLink">Privacy Policy</a>
+                           <span class="separator">•</span>
+                           <a href="#" id="disclaimerLink">Disclaimer</a>
+                  </div>
+                  <div class="copyright">
+                           Data provided by BIXI Montréal (GBFS feed). This is an independent project not affiliated
+                           with PBSC or Lyft.
+                           Real-time availability may be delayed. Use at your own discretion.
+                  </div>
+         </footer>
+
+         <!-- MODAL DIALOG FOR LEGAL CONTENT (lightweight) -->
+         <div id="legalModal"
+                  style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(3px);">
+                  <div
+                           style="background: white; max-width: 500px; width: 90%; max-height: 80%; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 35px rgba(0,0,0,0.3); display: flex; flex-direction: column;">
+                           <div
+                                    style="padding: 18px 20px; background: #1a2c3e; color: white; display: flex; justify-content: space-between; align-items: center;">
+                                    <h3 style="font-size: 1.2rem;" id="modalTitle">Terms of Use</h3>
+                                    <button id="closeModal"
+                                             style="background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; line-height: 1;">&times;</button>
+                           </div>
+                           <div style="padding: 20px; overflow-y: auto; font-size: 0.9rem; line-height: 1.5; color: #1e2f3f;"
+                                    id="modalContent">
+                                    <!-- dynamic content injected -->
+                           </div>
+                  </div>
+         </div>
+
          <script>
                   // ========== BIXI DASHBOARD - FULLY RESPONSIVE ==========
                   const GBFS_DISCOVERY_URL = 'https://gbfs.velobixi.com/gbfs/gbfs.json';
@@ -563,6 +654,71 @@
                   const updateTimeSpan = document.getElementById('updateTime');
                   const stationListDiv = document.getElementById('stationList');
                   const searchInput = document.getElementById('stationSearch');
+
+                  // Modal elements
+                  const modal = document.getElementById('legalModal');
+                  const modalTitle = document.getElementById('modalTitle');
+                  const modalContent = document.getElementById('modalContent');
+                  const closeModalBtn = document.getElementById('closeModal');
+
+                  function showLegalModal(type) {
+                           let title = '';
+                           let content = '';
+                           if (type === 'terms') {
+                                    title = 'Terms of Use';
+                                    content = `<strong>Terms of Use</strong><br><br>
+                This dashboard is provided for informational purposes only. The data displayed comes from the public GBFS feed of BIXI Montréal.<br><br>
+                <strong>1. No Warranty</strong><br>
+                The availability of bikes and docks is shown in real-time but may be subject to delays or errors. We do not guarantee the accuracy, completeness, or timeliness of the information.<br><br>
+                <strong>2. Non-Affiliation</strong><br>
+                This project is an independent development and is not officially affiliated with, endorsed, or sponsored by BIXI Montréal, PBSC Urban Solutions, or Lyft.<br><br>
+                <strong>3. Use at Your Own Risk</strong><br>
+                Any reliance on the data provided is strictly at your own risk. We are not liable for any decisions made based on the station availability shown.<br><br>
+                <strong>4. Intellectual Property</strong><br>
+                All trademarks and logos remain property of their respective owners. The map tiles are provided by CartoDB and OpenStreetMap contributors.`;
+                           } else if (type === 'privacy') {
+                                    title = 'Privacy Policy';
+                                    content = `<strong>Privacy Policy</strong><br><br>
+                This dashboard does not collect, store, or share any personal data. No cookies are used for tracking purposes.<br><br>
+                <strong>Local Storage</strong><br>
+                No user data is saved locally. All station data is fetched directly from public BIXI endpoints and is not retained beyond the current session.<br><br>
+                <strong>Third-Party Services</strong><br>
+                The map uses Leaflet and CartoDB tile servers which may collect anonymized usage data according to their own privacy policies. No personal information is transmitted.<br><br>
+                <strong>Contact</strong><br>
+                For any privacy-related questions, please refer to BIXI Montréal's official privacy policy.`;
+                           } else if (type === 'disclaimer') {
+                                    title = 'Disclaimer';
+                                    content = `<strong>Disclaimer</strong><br><br>
+                THE SOFTWARE AND DATA ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.<br><br>
+                IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE DATA.<br><br>
+                BIXI Montréal is a registered trademark. This dashboard is an unofficial tool meant to help users visualize station status. For official reservations and accurate real-time updates, please refer to the official BIXI mobile application.`;
+                           }
+                           modalTitle.innerText = title;
+                           modalContent.innerHTML = content;
+                           modal.style.display = 'flex';
+                  }
+
+                  function closeModal() {
+                           modal.style.display = 'none';
+                  }
+
+                  // Event listeners for legal links
+                  document.getElementById('termsLink').addEventListener('click', (e) => {
+                           e.preventDefault();
+                           showLegalModal('terms');
+                  });
+                  document.getElementById('privacyLink').addEventListener('click', (e) => {
+                           e.preventDefault();
+                           showLegalModal('privacy');
+                  });
+                  document.getElementById('disclaimerLink').addEventListener('click', (e) => {
+                           e.preventDefault();
+                           showLegalModal('disclaimer');
+                  });
+                  closeModalBtn.addEventListener('click', closeModal);
+                  modal.addEventListener('click', (e) => {
+                           if (e.target === modal) closeModal();
+                  });
 
                   function formatTimestamp(ts) {
                            if (!ts) return 'N/A';
@@ -681,7 +837,6 @@
             `;
                            });
                            stationListDiv.innerHTML = html;
-
                            document.querySelectorAll('.station-card').forEach(card => {
                                     const clickHandler = (e) => {
                                              const lat = parseFloat(card.dataset.lat);
@@ -703,75 +858,48 @@
 
                   function updateMapMarkers(stations) {
                            if (!map) return;
-                           if (markersLayer) {
-                                    markersLayer.clearLayers();
-                           } else {
-                                    markersLayer = L.layerGroup().addTo(map);
-                           }
+                           if (markersLayer) markersLayer.clearLayers();
+                           else markersLayer = L.layerGroup().addTo(map);
                            currentMarkers = [];
-
                            const bikeIcon = L.divIcon({
                                     className: 'custom-bike-icon',
                                     html: `<div style="background-color:#ff8c42; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.25); border:2px solid white;"><i class="fas fa-bicycle" style="color:white; font-size:15px;"></i></div>`,
                                     iconSize: [30, 30],
                                     popupAnchor: [0, -12]
                            });
-
                            stations.forEach(station => {
                                     const marker = L.marker([station.lat, station.lon], { icon: bikeIcon, stationId: station.id });
-                                    const popupContent = `
-                <div style="font-weight:700; font-size:1rem; margin-bottom:5px;">${escapeHtml(station.name)}</div>
-                <div><i class="fas fa-bicycle"></i> <strong>${station.bikes}</strong> bikes</div>
-                <div><i class="fas fa-parking"></i> <strong>${station.docks}</strong> free docks</div>
-                <div><i class="fas fa-charging-station"></i> Capacity: ${station.capacity}</div>
-                <div><i class="fas fa-info-circle"></i> ${station.is_renting ? '✅ Operational' : '⛔ Temporarily closed'}</div>
-                <small><i class="far fa-clock"></i> Updated: ${station.last_reported ? formatTimestamp(station.last_reported) : 'recent'}</small>
-            `;
-                                    marker.bindPopup(popupContent);
+                                    marker.bindPopup(`
+                    <div style="font-weight:700; font-size:1rem; margin-bottom:5px;">${escapeHtml(station.name)}</div>
+                    <div><i class="fas fa-bicycle"></i> <strong>${station.bikes}</strong> bikes</div>
+                    <div><i class="fas fa-parking"></i> <strong>${station.docks}</strong> free docks</div>
+                    <div><i class="fas fa-charging-station"></i> Capacity: ${station.capacity}</div>
+                    <div><i class="fas fa-info-circle"></i> ${station.is_renting ? '✅ Operational' : '⛔ Temporarily closed'}</div>
+                    <small><i class="far fa-clock"></i> Updated: ${station.last_reported ? formatTimestamp(station.last_reported) : 'recent'}</small>
+                `);
                                     marker.addTo(markersLayer);
                                     currentMarkers.push(marker);
                            });
-
-                           if (stations.length > 0) {
-                                    const bounds = L.latLngBounds(stations.map(s => [s.lat, s.lon]));
-                                    map.fitBounds(bounds, { padding: [40, 40] });
-                           } else if (allStationsArray.length > 0) {
-                                    const allBounds = L.latLngBounds(allStationsArray.map(s => [s.lat, s.lon]));
-                                    map.fitBounds(allBounds, { padding: [40, 40] });
-                           }
+                           if (stations.length) map.fitBounds(L.latLngBounds(stations.map(s => [s.lat, s.lon])), { padding: [40, 40] });
+                           else if (allStationsArray.length) map.fitBounds(L.latLngBounds(allStationsArray.map(s => [s.lat, s.lon])), { padding: [40, 40] });
                   }
 
                   function updateDashboardAndMap(filterText = '') {
                            if (!stationInfoMap.size) return;
                            const stations = buildCombinedStations();
                            allStationsArray = stations;
-
                            let totalBikes = 0, totalDocks = 0;
-                           stations.forEach(s => {
-                                    totalBikes += s.bikes;
-                                    totalDocks += s.docks;
-                           });
+                           stations.forEach(s => { totalBikes += s.bikes; totalDocks += s.docks; });
                            totalStationsSpan.innerText = stations.length;
                            totalBikesSpan.innerText = totalBikes;
                            totalDocksSpan.innerText = totalDocks;
-
                            const filterLower = filterText.trim().toLowerCase();
-                           let filteredStations = stations;
-                           if (filterLower !== '') {
-                                    filteredStations = stations.filter(s => s.name.toLowerCase().includes(filterLower));
-                           }
-
-                           renderStationList(filteredStations);
-                           updateMapMarkers(filteredStations);
+                           const filtered = filterLower ? stations.filter(s => s.name.toLowerCase().includes(filterLower)) : stations;
+                           renderStationList(filtered);
+                           updateMapMarkers(filtered);
                   }
 
-                  function setLastUpdated(timestamp) {
-                           if (timestamp) {
-                                    updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> ${formatTimestamp(timestamp)}`;
-                           } else {
-                                    updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> Live feed`;
-                           }
-                  }
+                  function setLastUpdated(ts) { updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> ${ts ? formatTimestamp(ts) : 'Live feed'}`; }
 
                   async function loadBixiData() {
                            try {
@@ -780,56 +908,32 @@
                                     await fetchStationInfo(stationInfoUrl);
                                     const latestReport = await fetchStationStatus(stationStatusUrl);
                                     setLastUpdated(latestReport);
-
                                     if (!map) {
                                              map = L.map('map').setView([45.515, -73.567], 13);
-                                             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                                                      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; CartoDB',
-                                                      subdomains: 'abcd',
-                                                      maxZoom: 18
-                                             }).addTo(map);
-                                             window.addEventListener('resize', () => {
-                                                      if (map) setTimeout(() => map.invalidateSize(), 100);
-                                             });
+                                             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OSM & CartoDB', subdomains: 'abcd', maxZoom: 18 }).addTo(map);
+                                             window.addEventListener('resize', () => map && setTimeout(() => map.invalidateSize(), 100));
                                     }
-
                                     updateDashboardAndMap('');
-
                                     if (window.searchListener) searchInput.removeEventListener('input', window.searchListener);
-                                    const searchHandler = (e) => {
-                                             updateDashboardAndMap(e.target.value);
-                                    };
+                                    const searchHandler = (e) => updateDashboardAndMap(e.target.value);
                                     searchInput.addEventListener('input', searchHandler);
                                     window.searchListener = searchHandler;
-
                                     if (window.refreshInterval) clearInterval(window.refreshInterval);
                                     window.refreshInterval = setInterval(async () => {
                                              try {
-                                                      const { stationStatusUrl: newStatusUrl } = await fetchFeedUrls();
-                                                      const newReport = await fetchStationStatus(newStatusUrl);
+                                                      const { stationStatusUrl: newUrl } = await fetchFeedUrls();
+                                                      const newReport = await fetchStationStatus(newUrl);
                                                       setLastUpdated(newReport);
                                                       updateDashboardAndMap(searchInput.value);
-                                             } catch (err) {
-                                                      console.warn("Background refresh warning:", err);
-                                             }
+                                             } catch (err) { console.warn("Refresh err:", err); }
                                     }, 50000);
-
                            } catch (err) {
-                                    console.error(err);
-                                    stationListDiv.innerHTML = `<div class="error-msg"><i class="fas fa-exclamation-triangle"></i> Error: ${err.message}<br>Please check network or CORS. GBFS endpoint should be accessible.</div>`;
+                                    stationListDiv.innerHTML = `<div class="error-msg"><i class="fas fa-exclamation-triangle"></i> Error: ${err.message}<br>Check network.</div>`;
                                     updateTimeSpan.innerHTML = `<i class="fas fa-exclamation-circle"></i> Connection issue`;
-                                    if (map) {
-                                             map.setView([45.5088, -73.554], 12);
-                                    }
+                                    if (map) map.setView([45.5088, -73.554], 12);
                            }
                   }
-
-                  window.addEventListener('orientationchange', () => {
-                           setTimeout(() => {
-                                    if (map) map.invalidateSize();
-                           }, 100);
-                  });
-
+                  window.addEventListener('orientationchange', () => setTimeout(() => map?.invalidateSize(), 100));
                   loadBixiData();
          </script>
 </body>
