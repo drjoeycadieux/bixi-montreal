@@ -2,7 +2,7 @@
 
 A real-time interactive dashboard for BIXI Montréal bike-sharing stations. View station locations, bike availability, and dock availability on an interactive map with a responsive mobile-friendly interface.
 
-![Dashboard Preview](https://via.placeholder.com/800x400?text=BIXI+Dashboard+Screenshot)
+![Dashboard Preview](https://bixi-all-system.netlify.app/assets/image-web.jpeg)
 
 ## 📋 Table of Contents
 
