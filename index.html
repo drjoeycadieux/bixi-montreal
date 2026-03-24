@@ -28,7 +28,7 @@
                            touch-action: pan-x pan-y;
                   }
 
-                  /* ===== OFFLINE BANNER STYLES (Mobile First) ===== */
+                  /* ===== OFFLINE BANNER STYLES ===== */
                   .offline-banner {
                            width: 100%;
                            background: linear-gradient(95deg, #8b2c2c 0%, #6b1a1a 100%);
@@ -341,38 +341,51 @@
                            font-weight: 500;
                   }
 
-                  /* ===== FOOTER LEGAL STYLES ===== */
+                  /* ===== FOOTER LEGAL STYLES - FULLY MOBILE FRIENDLY ===== */
                   .legal-footer {
                            background: #1e2f3f;
                            color: #9aaebf;
-                           padding: 12px 20px;
-                           font-size: 0.7rem;
-                           text-align: center;
+                           padding: 14px 16px;
                            border-top: 1px solid #2d4459;
                            z-index: 10;
                            flex-shrink: 0;
                   }
 
-                  .legal-footer a {
-                           color: #ffb347;
-                           text-decoration: none;
-                           transition: opacity 0.2s;
+                  .footer-links {
+                           display: flex;
+                           justify-content: center;
+                           align-items: center;
+                           flex-wrap: wrap;
+                           gap: 12px;
+                           row-gap: 8px;
+                           margin-bottom: 10px;
                   }
 
-                  .legal-footer a:hover {
+                  .footer-links a {
+                           color: #ffb347;
+                           text-decoration: none;
+                           font-size: 0.75rem;
+                           font-weight: 500;
+                           transition: opacity 0.2s;
+                           padding: 4px 0;
+                           display: inline-block;
+                  }
+
+                  .footer-links a:hover {
                            opacity: 0.8;
                            text-decoration: underline;
                   }
 
-                  .legal-footer .separator {
-                           margin: 0 8px;
+                  .footer-separator {
                            color: #4a627a;
+                           font-size: 0.7rem;
                   }
 
-                  .legal-footer .copyright {
-                           margin-top: 6px;
+                  .copyright {
                            font-size: 0.65rem;
                            color: #6a85a0;
+                           text-align: center;
+                           line-height: 1.4;
                   }
 
                   /* Leaflet popup enhancements */
@@ -476,8 +489,24 @@
                            }
 
                            .legal-footer {
-                                    padding: 10px 14px;
-                                    font-size: 0.65rem;
+                                    padding: 12px 12px;
+                           }
+
+                           .footer-links {
+                                    gap: 10px;
+                                    margin-bottom: 8px;
+                           }
+
+                           .footer-links a {
+                                    font-size: 0.7rem;
+                           }
+
+                           .footer-separator {
+                                    display: inline-block;
+                           }
+
+                           .copyright {
+                                    font-size: 0.6rem;
                            }
 
                            .map-reset-hint {
@@ -487,6 +516,7 @@
                            }
                   }
 
+                  /* Very small phones - stack links vertically for better touch */
                   @media (max-width: 480px) {
                            .stats-summary {
                                     gap: 6px;
@@ -517,8 +547,32 @@
                            }
 
                            .legal-footer {
-                                    padding: 8px 10px;
-                                    font-size: 0.6rem;
+                                    padding: 10px 10px;
+                           }
+
+                           /* Stack footer links vertically on very small screens */
+                           .footer-links {
+                                    flex-direction: column;
+                                    gap: 6px;
+                                    margin-bottom: 10px;
+                           }
+
+                           .footer-separator {
+                                    display: none;
+                           }
+
+                           .footer-links a {
+                                    font-size: 0.7rem;
+                                    padding: 6px 0;
+                                    width: 100%;
+                                    text-align: center;
+                                    background: rgba(255, 255, 255, 0.05);
+                                    border-radius: 30px;
+                           }
+
+                           .copyright {
+                                    font-size: 0.55rem;
+                                    padding: 0 4px;
                            }
                   }
 
@@ -540,6 +594,10 @@
 
                            .map-reset-hint {
                                     bottom: 80px;
+                           }
+
+                           .footer-links a {
+                                    font-size: 0.75rem;
                            }
                   }
          </style>
@@ -601,15 +659,15 @@
                   <i class="fas fa-hand-pointer"></i> Tap station card to center
          </div>
 
-         <!-- LEGAL FOOTER WITH TERMS & DISCLAIMERS -->
+         <!-- LEGAL FOOTER - FULLY MOBILE FRIENDLY (stackable links) -->
          <footer class="legal-footer">
-                  <div>
+                  <div class="footer-links">
                            <span>© 2025 BIXI MTL Dashboard</span>
-                           <span class="separator">•</span>
+                           <span class="footer-separator">•</span>
                            <a href="#" id="termsLink">Terms of Use</a>
-                           <span class="separator">•</span>
+                           <span class="footer-separator">•</span>
                            <a href="#" id="privacyLink">Privacy Policy</a>
-                           <span class="separator">•</span>
+                           <span class="footer-separator">•</span>
                            <a href="#" id="disclaimerLink">Disclaimer</a>
                   </div>
                   <div class="copyright">
@@ -619,7 +677,7 @@
                   </div>
          </footer>
 
-         <!-- MODAL DIALOG FOR LEGAL CONTENT (lightweight) -->
+         <!-- MODAL DIALOG FOR LEGAL CONTENT -->
          <div id="legalModal"
                   style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(3px);">
                   <div
