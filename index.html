@@ -4,7 +4,6 @@
 <head>
          <meta charset="UTF-8">
          <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-         <link rel="stylesheet" href="/css/alert.css">
          <title>Bixi MTL Live Dashboard - Station Availability</title>
          <!-- Leaflet CSS & JS -->
          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -27,7 +26,72 @@
                            overflow: hidden;
                            background: #f0f4f8;
                            touch-action: pan-x pan-y;
-                           /* preserve panning on mobile */
+                  }
+
+                  /* ===== OFFLINE BANNER STYLES (Mobile First) ===== */
+                  .offline-banner {
+                           width: 100%;
+                           background: linear-gradient(95deg, #8b2c2c 0%, #6b1a1a 100%);
+                           color: white;
+                           padding: 12px 16px;
+                           display: flex;
+                           align-items: center;
+                           justify-content: center;
+                           gap: 12px;
+                           flex-wrap: wrap;
+                           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                           border-bottom: 2px solid #ffb347;
+                           z-index: 1000;
+                           position: relative;
+                  }
+
+                  .warning-icon {
+                           display: inline-flex;
+                           align-items: center;
+                           justify-content: center;
+                           animation: pulseWarning 1.2s infinite ease-in-out;
+                           flex-shrink: 0;
+                  }
+
+                  .triangle-svg {
+                           filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+                           display: block;
+                  }
+
+                  .banner-text {
+                           font-weight: 600;
+                           font-size: 0.9rem;
+                           letter-spacing: 0.3px;
+                           text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+                           text-align: center;
+                           flex: 1;
+                  }
+
+                  .banner-text strong {
+                           font-weight: 800;
+                           text-transform: uppercase;
+                           background: rgba(255, 255, 255, 0.2);
+                           padding: 3px 10px;
+                           border-radius: 30px;
+                           margin-right: 6px;
+                           display: inline-block;
+                  }
+
+                  @keyframes pulseWarning {
+                           0% {
+                                    opacity: 0.8;
+                                    transform: scale(1);
+                           }
+
+                           50% {
+                                    opacity: 1;
+                                    transform: scale(1.08);
+                           }
+
+                           100% {
+                                    opacity: 0.8;
+                                    transform: scale(1);
+                           }
                   }
 
                   /* ===== HEADER ===== */
@@ -42,7 +106,6 @@
                            gap: 10px;
                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
                            z-index: 10;
-                           backdrop-filter: blur(2px);
                   }
 
                   .title h1 {
@@ -89,7 +152,7 @@
                            white-space: nowrap;
                   }
 
-                  /* ===== MAIN LAYOUT (flex row on desktop, column on mobile) ===== */
+                  /* ===== MAIN LAYOUT ===== */
                   .dashboard-container {
                            display: flex;
                            flex: 1;
@@ -112,10 +175,8 @@
                            flex-direction: column;
                            overflow: hidden;
                            z-index: 2;
-                           transition: transform 0.25s ease;
                   }
 
-                  /* Sidebar inner elements */
                   .sidebar-header {
                            padding: 12px 16px;
                            background: #f8fafc;
@@ -170,7 +231,6 @@
                            -webkit-overflow-scrolling: touch;
                   }
 
-                  /* Station cards (touch friendly) */
                   .station-card {
                            background: #ffffff;
                            border-radius: 20px;
@@ -259,14 +319,47 @@
                            font-size: 0.85rem;
                   }
 
-                  /* loading indicator */
                   .loading-spinner {
                            text-align: center;
                            padding: 2rem;
                            color: #3b6e8b;
                   }
 
-                  /* ===== RESPONSIVE: MOBILE FIRST ENHANCEMENTS ===== */
+                  .map-reset-hint {
+                           position: absolute;
+                           bottom: 12px;
+                           right: 12px;
+                           background: rgba(255, 255, 255, 0.85);
+                           padding: 5px 10px;
+                           border-radius: 30px;
+                           font-size: 11px;
+                           z-index: 400;
+                           pointer-events: none;
+                           backdrop-filter: blur(4px);
+                           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+                           font-weight: 500;
+                  }
+
+                  /* Leaflet popup enhancements */
+                  .leaflet-popup-content {
+                           font-size: 0.85rem;
+                           min-width: 170px;
+                           margin: 10px 12px;
+                  }
+
+                  .leaflet-popup-content strong {
+                           color: #1e4663;
+                  }
+
+                  .custom-bike-icon div {
+                           transition: transform 0.1s ease;
+                  }
+
+                  .leaflet-control-attribution {
+                           font-size: 9px;
+                  }
+
+                  /* ===== RESPONSIVE: MOBILE FIRST ===== */
                   @media (max-width: 780px) {
                            .dashboard-container {
                                     flex-direction: column;
@@ -327,9 +420,27 @@
                                     font-size: 0.75rem;
                                     padding: 4px 10px;
                            }
+
+                           .offline-banner {
+                                    padding: 10px 12px;
+                                    gap: 8px;
+                           }
+
+                           .banner-text {
+                                    font-size: 0.75rem;
+                           }
+
+                           .banner-text strong {
+                                    font-size: 0.7rem;
+                                    padding: 2px 8px;
+                           }
+
+                           .triangle-svg {
+                                    width: 22px;
+                                    height: 22px;
+                           }
                   }
 
-                  /* Very small phones (<=480px) */
                   @media (max-width: 480px) {
                            .stats-summary {
                                     gap: 6px;
@@ -348,9 +459,18 @@
                                     margin: 8px 12px;
                                     padding: 6px 12px;
                            }
+
+                           .banner-text {
+                                    font-size: 0.7rem;
+                           }
+
+                           .banner-text strong {
+                                    font-size: 0.65rem;
+                                    padding: 2px 6px;
+                                    margin-right: 4px;
+                           }
                   }
 
-                  /* Tablet landscape or desktop: ensure map is large */
                   @media (min-width: 1024px) {
                            .sidebar {
                                     flex: 1;
@@ -367,46 +487,11 @@
                                     border-color: #cbdde9;
                            }
                   }
-
-                  /* Leaflet popup enhancements */
-                  .leaflet-popup-content {
-                           font-size: 0.85rem;
-                           min-width: 170px;
-                           margin: 10px 12px;
-                  }
-
-                  .leaflet-popup-content strong {
-                           color: #1e4663;
-                  }
-
-                  .custom-bike-icon div {
-                           transition: transform 0.1s ease;
-                  }
-
-                  /* hide default leaflet attribution on very small? keep readable */
-                  .leaflet-control-attribution {
-                           font-size: 9px;
-                  }
-
-                  /* small button for optional reset view (optional) but not necessary */
-                  .map-reset-hint {
-                           position: absolute;
-                           bottom: 12px;
-                           right: 12px;
-                           background: rgba(255, 255, 255, 0.85);
-                           padding: 5px 10px;
-                           border-radius: 30px;
-                           font-size: 11px;
-                           z-index: 400;
-                           pointer-events: none;
-                           backdrop-filter: blur(4px);
-                           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                           font-weight: 500;
-                  }
          </style>
 </head>
 
 <body>
+         <!-- OFFLINE BANNER - Mobile Friendly -->
          <div class="offline-banner">
                   <div class="warning-icon">
                            <svg class="triangle-svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
@@ -421,6 +506,7 @@
                            check back later.
                   </div>
          </div>
+
          <div class="dashboard-header">
                   <div class="title">
                            <h1><i class="fas fa-bicycle" style="color:#ff9f4a;"></i> BIXI Montréal</h1>
@@ -462,19 +548,15 @@
 
          <script>
                   // ========== BIXI DASHBOARD - FULLY RESPONSIVE ==========
-                  // GBFS Discovery URL
                   const GBFS_DISCOVERY_URL = 'https://gbfs.velobixi.com/gbfs/gbfs.json';
 
-                  // Data stores
-                  let stationInfoMap = new Map();     // station_id -> { name, lat, lon, capacity, address }
-                  let stationStatusMap = new Map();   // station_id -> { bikes, docks, is_renting, last_reported }
-
+                  let stationInfoMap = new Map();
+                  let stationStatusMap = new Map();
                   let map = null;
                   let markersLayer = null;
                   let currentMarkers = [];
                   let allStationsArray = [];
 
-                  // DOM elements
                   const totalStationsSpan = document.getElementById('totalStations');
                   const totalBikesSpan = document.getElementById('totalBikes');
                   const totalDocksSpan = document.getElementById('totalDocks');
@@ -482,14 +564,12 @@
                   const stationListDiv = document.getElementById('stationList');
                   const searchInput = document.getElementById('stationSearch');
 
-                  // Helper: format timestamp (local time)
                   function formatTimestamp(ts) {
                            if (!ts) return 'N/A';
                            const date = new Date(ts * 1000);
                            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                   }
 
-                  // Fetch GBFS feed URLs (english)
                   async function fetchFeedUrls() {
                            const response = await fetch(GBFS_DISCOVERY_URL);
                            const data = await response.json();
@@ -504,7 +584,6 @@
                            return { stationInfoUrl, stationStatusUrl };
                   }
 
-                  // Fetch station info (name, lat, lng, capacity)
                   async function fetchStationInfo(url) {
                            const resp = await fetch(url);
                            const json = await resp.json();
@@ -523,7 +602,6 @@
                            return stationInfoMap.size;
                   }
 
-                  // Fetch station status (bikes/docks availability)
                   async function fetchStationStatus(url) {
                            const resp = await fetch(url);
                            const json = await resp.json();
@@ -545,7 +623,6 @@
                            return latestReport;
                   }
 
-                  // Combine info + status into one array
                   function buildCombinedStations() {
                            const combined = [];
                            for (let [id, info] of stationInfoMap.entries()) {
@@ -566,7 +643,6 @@
                            return combined;
                   }
 
-                  // Escape HTML
                   function escapeHtml(str) {
                            if (!str) return '';
                            return str.replace(/[&<>]/g, function (m) {
@@ -577,7 +653,6 @@
                            });
                   }
 
-                  // Render station list (with touch/click handler)
                   function renderStationList(stations) {
                            if (!stations.length) {
                                     stationListDiv.innerHTML = `<div class="error-msg"><i class="fas fa-search-minus"></i> No station matches "${escapeHtml(searchInput.value)}"</div>`;
@@ -607,28 +682,25 @@
                            });
                            stationListDiv.innerHTML = html;
 
-                           // Attach event listeners for each card (mobile & desktop)
                            document.querySelectorAll('.station-card').forEach(card => {
                                     const clickHandler = (e) => {
                                              const lat = parseFloat(card.dataset.lat);
                                              const lon = parseFloat(card.dataset.lon);
                                              const stationId = card.dataset.id;
                                              if (map && !isNaN(lat) && !isNaN(lon)) {
-                                                      map.setView([lat, lon], 16, { animate: true, duration: 0.3 });
+                                                      map.setView([lat, lon], 16, { animate: true });
                                                       const marker = currentMarkers.find(m => m.options?.stationId === stationId);
                                                       if (marker) marker.openPopup();
                                              }
                                     };
                                     card.addEventListener('click', clickHandler);
                                     card.addEventListener('touchstart', (e) => {
-                                             // improve touch feedback without preventing scroll
                                              card.style.transform = 'scale(0.98)';
                                              setTimeout(() => { card.style.transform = ''; }, 120);
                                     }, { passive: true });
                            });
                   }
 
-                  // Update map markers (optimized for both devices)
                   function updateMapMarkers(stations) {
                            if (!map) return;
                            if (markersLayer) {
@@ -638,7 +710,6 @@
                            }
                            currentMarkers = [];
 
-                           // Consistent bike icon (friendly for mobile tap)
                            const bikeIcon = L.divIcon({
                                     className: 'custom-bike-icon',
                                     html: `<div style="background-color:#ff8c42; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.25); border:2px solid white;"><i class="fas fa-bicycle" style="color:white; font-size:15px;"></i></div>`,
@@ -661,7 +732,6 @@
                                     currentMarkers.push(marker);
                            });
 
-                           // Auto-fit bounds if we have stations
                            if (stations.length > 0) {
                                     const bounds = L.latLngBounds(stations.map(s => [s.lat, s.lon]));
                                     map.fitBounds(bounds, { padding: [40, 40] });
@@ -671,7 +741,6 @@
                            }
                   }
 
-                  // Update entire dashboard: totals, sidebar, map
                   function updateDashboardAndMap(filterText = '') {
                            if (!stationInfoMap.size) return;
                            const stations = buildCombinedStations();
@@ -696,7 +765,6 @@
                            updateMapMarkers(filteredStations);
                   }
 
-                  // set last updated text
                   function setLastUpdated(timestamp) {
                            if (timestamp) {
                                     updateTimeSpan.innerHTML = `<i class="far fa-clock"></i> ${formatTimestamp(timestamp)}`;
@@ -705,7 +773,6 @@
                            }
                   }
 
-                  // Main load & refresh logic
                   async function loadBixiData() {
                            try {
                                     stationListDiv.innerHTML = `<div class="loading-spinner"><i class="fas fa-spinner fa-pulse"></i> Fetching Bixi stations...</div>`;
@@ -714,7 +781,6 @@
                                     const latestReport = await fetchStationStatus(stationStatusUrl);
                                     setLastUpdated(latestReport);
 
-                                    // Initialize map if needed
                                     if (!map) {
                                              map = L.map('map').setView([45.515, -73.567], 13);
                                              L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -722,16 +788,13 @@
                                                       subdomains: 'abcd',
                                                       maxZoom: 18
                                              }).addTo(map);
-                                             // Adjust map when sidebar toggles on resize? just handle resize event
                                              window.addEventListener('resize', () => {
                                                       if (map) setTimeout(() => map.invalidateSize(), 100);
                                              });
                                     }
 
-                                    // initial render
                                     updateDashboardAndMap('');
 
-                                    // search handler
                                     if (window.searchListener) searchInput.removeEventListener('input', window.searchListener);
                                     const searchHandler = (e) => {
                                              updateDashboardAndMap(e.target.value);
@@ -739,7 +802,6 @@
                                     searchInput.addEventListener('input', searchHandler);
                                     window.searchListener = searchHandler;
 
-                                    // auto-refresh every 50 seconds (polite, respects GBFS TTL)
                                     if (window.refreshInterval) clearInterval(window.refreshInterval);
                                     window.refreshInterval = setInterval(async () => {
                                              try {
@@ -757,20 +819,17 @@
                                     stationListDiv.innerHTML = `<div class="error-msg"><i class="fas fa-exclamation-triangle"></i> Error: ${err.message}<br>Please check network or CORS. GBFS endpoint should be accessible.</div>`;
                                     updateTimeSpan.innerHTML = `<i class="fas fa-exclamation-circle"></i> Connection issue`;
                                     if (map) {
-                                             // fallback map view
                                              map.setView([45.5088, -73.554], 12);
                                     }
                            }
                   }
 
-                  // Handle orientation changes and map sizing (mobile perfection)
                   window.addEventListener('orientationchange', () => {
                            setTimeout(() => {
                                     if (map) map.invalidateSize();
                            }, 100);
                   });
 
-                  // start application
                   loadBixiData();
          </script>
 </body>
